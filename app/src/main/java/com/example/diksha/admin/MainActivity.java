@@ -7,15 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import com.google.android.gms.maps.model.LatLng;
-import com.firebase.geofire.GeoFire;
-import com.firebase.geofire.GeoLocation;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         createView();
         createListeners();
+
     }
 
     private void createView(){
@@ -42,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         SubmitLocations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addLocationstoFirebase();
+                //addLocationstoFirebase();
+                transaction();
                 Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
             }
@@ -50,15 +48,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addLocationstoFirebase(){
-        Map<String, GeoLocation> locationMap = new ConcurrentHashMap<>();
         LatLng latLngs[] = dataStash.getLatLngs();
         int i=0;
+        String key;
         for(LatLng latLng : latLngs){
             i += 1;
             Log.d("Adding geolocations ", latLng.toString());
-            dataStash.firebase.child(CONSTANTS.FIREBASE.GEOFIRE).push().setValue(latLng);
+            key = dataStash.firebase.child(CONSTANTS.FIREBASE.GEOFIRE).push().getKey();
+            dataStash.firebase.child(CONSTANTS.FIREBASE.GEOFIRE).child(key).setValue(latLng.toString());
         }
         Log.d("ADDED", "added all the locations to firebase");
+    }
+
+    private void transaction(){
+        dataStash.firebase.child(CONSTANTS.FIREBASE.GEOFIRE)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String latlng = dataSnapshot.getValue().toString();
+                        Toast.makeText(MainActivity.this, latlng, Toast.LENGTH_LONG).show();
+                        Log.d("FETCHED", latlng);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
     }
 
     /*
