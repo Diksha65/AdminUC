@@ -8,7 +8,7 @@ public class CONSTANTS {
 
     public class FIREBASE {
 
-        static final String GEOFIRE = "locations";
+        static final String GEOFIRE = "LIST_OF_AVAILABLE_LOCATIONS";
 
     }
 

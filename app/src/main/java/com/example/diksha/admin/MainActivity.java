@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
+import android.widget.Toast;
+import com.google.android.gms.maps.model.LatLng;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.google.firebase.database.DatabaseError;
@@ -35,28 +36,40 @@ public class MainActivity extends AppCompatActivity {
 
     private void createView(){
         SubmitLocations = (Button)findViewById(R.id.submitLocations);
-        StartRegistration = (Button)findViewById(R.id.startRegistration);
-        StartGamePlay = (Button)findViewById(R.id.startGamePlay);
-        SubmitLocations = (Button)findViewById(R.id.stopGamePlay);
     }
 
     private void createListeners(){
         SubmitLocations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addStaticGeoFireLocationstoMap(dataStash.geoFire, geoFireLocations());
+                addLocationstoFirebase();
                 Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
             }
         });
     }
 
+    private void addLocationstoFirebase(){
+        Map<String, GeoLocation> locationMap = new ConcurrentHashMap<>();
+        LatLng latLngs[] = dataStash.getLatLngs();
+        int i=0;
+        for(LatLng latLng : latLngs){
+            i += 1;
+            Log.d("Adding geolocations ", latLng.toString());
+            dataStash.firebase.child(CONSTANTS.FIREBASE.GEOFIRE).push().setValue(latLng);
+        }
+        Log.d("ADDED", "added all the locations to firebase");
+    }
+
+    /*
     private static Map<String, GeoLocation> geoFireLocations(){
         Map<String, GeoLocation> locationMap = new ConcurrentHashMap<>();
         GeoLocation geoLocations[] = dataStash.getGeoLocations();
         int i = 0;
         for(GeoLocation geoLocation : geoLocations) {
             i += 1;
+            //Toast.makeText( ,"Geolocation " + Integer.toString(i) +" added.", Toast.LENGTH_SHORT).show();
+            Log.d("Adding geolocations ", Integer.toString(i));
             locationMap.put("LOCATION-" + Integer.toString(i), geoLocation);
         }
         return locationMap;
@@ -76,5 +89,5 @@ public class MainActivity extends AppCompatActivity {
                                 Log.e("ADDING STATIC GEOFIRE",error.toString());
                         }});
     }
-
+*/
 }
