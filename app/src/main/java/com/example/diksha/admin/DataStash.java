@@ -29,6 +29,15 @@ class DataStash {
 
     final LatLng[] getLatLngs() { return LatLngs; }
 
+    LatLng getLatLng(){
+        return new LatLng(22.252395, 84.901126);
+    }
+
+
+    String getString(LatLng latLng){
+        return "" + latLng.latitude + ", " + latLng.longitude;
+    }
+
     double querySize = 0.01; //KM
     GoogleMap googleMap;
     DatabaseReference firebase;
@@ -40,7 +49,7 @@ class DataStash {
             All Team Bases
      */
     
-    private LatLng LatLngs[] = new LatLng[]{
+    public LatLng LatLngs[] = new LatLng[]{
             new LatLng(22.252201, 84.904448),
             new LatLng(22.252119, 84.904432),
             new LatLng(22.252178, 84.904555),

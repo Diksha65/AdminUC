@@ -26,7 +26,7 @@
         app:cardElevation="64dp"
         app:cardCornerRadius="4dp"
         android:layout_margin="2dp"
-        app:contentPadding="25dp">
+        app:contentPadding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"

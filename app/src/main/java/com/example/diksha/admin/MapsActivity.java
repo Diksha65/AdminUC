@@ -1,5 +1,6 @@
 package com.example.diksha.admin;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
@@ -8,7 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,6 +29,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private SupportMapFragment mapFragment;
     private View bottomSheet;
     private Button deleteButton;
+    private Circle circle;
 
     private static DataStash dataStash = DataStash.getsDataStash();
 
@@ -50,14 +56,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         dataStash.googleMap = googleMap;
+        setMarkers();
 
+        CameraPosition cameraPosition = CameraPosition
+                .builder(dataStash.googleMap.getCameraPosition())
+                .target(dataStash.getLatLng())
+                .zoom(16)
+                .tilt(25)
+                .build();
+
+        dataStash.googleMap
+                .animateCamera(CameraUpdateFactory
+                        .newCameraPosition(cameraPosition)
+                );
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        dataStash.googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        dataStash.googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //LatLng sydney = new LatLng(-34, 151);
+        //dataStash.googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        //dataStash.googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         listeners();
     }
 
+
+    private void setMarkers(){
+        dataStash.googleMap.clear();
+        MarkerOptions options = new MarkerOptions().flat(true);
+        int i = 0;
+        for(LatLng latLng : dataStash.getLatLngs()){
+            i += 1;
+            dataStash.googleMap.addMarker(new MarkerOptions().flat(true).position(latLng).title("Marker"));
+            dataStash.googleMap.addCircle(new CircleOptions().center(latLng).radius(1)
+                    .strokeColor(Color.RED)
+                    .fillColor(Color.BLUE)
+            );
+        }
+    }
 
     public void listeners() {
 
@@ -90,7 +122,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-    //inflating the Bottom Sheet
     public void createView() {
         CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.mainContent);
         bottomSheet = coordinatorLayout.findViewById(R.id.bottomSheet);
@@ -101,7 +132,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 Log.e(TAG, "onStateChanged:" + newState);
-
             }
 
             @Override
