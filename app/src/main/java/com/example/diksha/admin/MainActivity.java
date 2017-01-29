@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         SubmitLocations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //addLocationstoFirebase();
+                addLocationstoFirebase();
                 //transaction();
                 Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     String getString(LatLng latLng){
-        return latLng.latitude + ", " + latLng.longitude;
+        return "" + latLng.latitude + ", " + latLng.longitude;
     }
 
     private void addLocationstoFirebase(){
@@ -81,33 +81,4 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    /*
-    private static Map<String, GeoLocation> geoFireLocations(){
-        Map<String, GeoLocation> locationMap = new ConcurrentHashMap<>();
-        GeoLocation geoLocations[] = dataStash.getGeoLocations();
-        int i = 0;
-        for(GeoLocation geoLocation : geoLocations) {
-            i += 1;
-            //Toast.makeText( ,"Geolocation " + Integer.toString(i) +" added.", Toast.LENGTH_SHORT).show();
-            Log.d("Adding geolocations ", Integer.toString(i));
-            locationMap.put("LOCATION-" + Integer.toString(i), geoLocation);
-        }
-        return locationMap;
-    }
-
-    private static void addStaticGeoFireLocationstoMap(GeoFire geoFire,
-                                          Map<String, GeoLocation> staticGeoLocations){
-        for(Map.Entry<String, GeoLocation> locationEntry : staticGeoLocations.entrySet())
-            geoFire.setLocation(
-                    locationEntry.getKey(),
-                    locationEntry.getValue(),
-                    //Success
-                    new GeoFire.CompletionListener() {
-                        @Override
-                        public void onComplete(String key, DatabaseError error) {
-                            if (error != null)
-                                Log.e("ADDING STATIC GEOFIRE",error.toString());
-                        }});
-    }
-*/
 }
