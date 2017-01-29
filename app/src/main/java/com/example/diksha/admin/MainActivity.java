@@ -1,0 +1,80 @@
+package com.example.diksha.admin;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class MainActivity extends AppCompatActivity {
+
+    private Button SubmitLocations;
+    private Button StartRegistration;
+    private Button StartGamePlay;
+    private Button StopGamePlay;
+
+    private static DataStash dataStash = DataStash.getsDataStash();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        createView();
+        createListeners();
+    }
+
+    private void createView(){
+        SubmitLocations = (Button)findViewById(R.id.submitLocations);
+        StartRegistration = (Button)findViewById(R.id.startRegistration);
+        StartGamePlay = (Button)findViewById(R.id.startGamePlay);
+        SubmitLocations = (Button)findViewById(R.id.stopGamePlay);
+    }
+
+    private void createListeners(){
+        SubmitLocations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addStaticGeoFireLocationstoMap(dataStash.geoFire, geoFireLocations());
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private static Map<String, GeoLocation> geoFireLocations(){
+        Map<String, GeoLocation> locationMap = new ConcurrentHashMap<>();
+        GeoLocation geoLocations[] = dataStash.getGeoLocations();
+        int i = 0;
+        for(GeoLocation geoLocation : geoLocations) {
+            i += 1;
+            locationMap.put("LOCATION-" + Integer.toString(i), geoLocation);
+        }
+        return locationMap;
+    }
+
+    private static void addStaticGeoFireLocationstoMap(GeoFire geoFire,
+                                          Map<String, GeoLocation> staticGeoLocations){
+        for(Map.Entry<String, GeoLocation> locationEntry : staticGeoLocations.entrySet())
+            geoFire.setLocation(
+                    locationEntry.getKey(),
+                    locationEntry.getValue(),
+                    //Success
+                    new GeoFire.CompletionListener() {
+                        @Override
+                        public void onComplete(String key, DatabaseError error) {
+                            if (error != null)
+                                Log.e("ADDING STATIC GEOFIRE",error.toString());
+                        }});
+    }
+
+}
