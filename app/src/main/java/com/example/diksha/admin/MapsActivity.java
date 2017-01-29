@@ -84,7 +84,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         for(LatLng latLng : dataStash.getLatLngs()){
             i += 1;
             dataStash.googleMap.addMarker(new MarkerOptions().flat(true).position(latLng).title("Marker"));
-            dataStash.googleMap.addCircle(new CircleOptions().center(latLng).radius(1)
+            dataStash.googleMap.addCircle(new CircleOptions().center(latLng).radius(10)
                     .strokeColor(Color.RED)
                     .fillColor(Color.BLUE)
             );
