@@ -40,11 +40,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //addLocationstoFirebase();
-                transaction();
+                //transaction();
                 Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
             }
         });
+    }
+
+    String getString(LatLng latLng){
+        return latLng.latitude + ", " + latLng.longitude;
     }
 
     private void addLocationstoFirebase(){
@@ -53,9 +57,9 @@ public class MainActivity extends AppCompatActivity {
         String key;
         for(LatLng latLng : latLngs){
             i += 1;
-            Log.d("Adding geolocations ", latLng.toString());
+            Log.d("Adding geolocations ", getString(latLng));
             key = dataStash.firebase.child(CONSTANTS.FIREBASE.GEOFIRE).push().getKey();
-            dataStash.firebase.child(CONSTANTS.FIREBASE.GEOFIRE).child(key).setValue(latLng.toString());
+            dataStash.firebase.child(CONSTANTS.FIREBASE.GEOFIRE).child(key).setValue(getString(latLng));
         }
         Log.d("ADDED", "added all the locations to firebase");
     }
