@@ -7,8 +7,8 @@ package com.thinkternet.uc2k17admin;
 public class CONSTANTS {
 
     public class FIREBASE {
-        static final String GEOFIRE = "LIST_OF_AVAILABLE_LOCATIONS";
-        static final String DELETED = "TO_BE_DELETED_LOCATIONS";
+        static final String AVAILABLE_LOCATIONS = "AVAILABLE_LOCATIONS";
+
     }
 
 }

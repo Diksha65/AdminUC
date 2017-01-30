@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.diksha.admin.R;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         SubmitLocations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //addLocationstoFirebase();
+                addLocationstoFirebase();
                 //transaction();
                 Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
@@ -55,14 +54,14 @@ public class MainActivity extends AppCompatActivity {
         for(LatLng latLng : latLngs){
             i += 1;
             Log.d("Adding geolocations ", dataStash.getString(latLng));
-            key = dataStash.firebase.child(CONSTANTS.FIREBASE.GEOFIRE).push().getKey();
-            dataStash.firebase.child(CONSTANTS.FIREBASE.GEOFIRE).child(key).setValue(dataStash.getString(latLng));
+            key = dataStash.firebase.child(CONSTANTS.FIREBASE.AVAILABLE_LOCATIONS).push().getKey();
+            dataStash.firebase.child(CONSTANTS.FIREBASE.AVAILABLE_LOCATIONS).child(key).setValue(dataStash.getString(latLng));
         }
         Log.d("ADDED", "added all the locations to firebase");
     }
 
     private void transaction(){
-        dataStash.firebase.child(CONSTANTS.FIREBASE.GEOFIRE)
+        dataStash.firebase.child(CONSTANTS.FIREBASE.AVAILABLE_LOCATIONS)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

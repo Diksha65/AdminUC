@@ -7,11 +7,14 @@
     android:id="@+id/mainContent"
     android:fitsSystemWindows="true">
 
-    <fragment android:id="@+id/map"
+    <fragment
+        android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.diksha.mapanimation.MapsActivity" />
+        tools:context="com.example.diksha.mapanimation.MapsActivity">
+
+    </fragment>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"

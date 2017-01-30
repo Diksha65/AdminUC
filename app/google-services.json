@@ -1,43 +1,35 @@
 {
   "project_info": {
-    "project_number": "434064450690",
-    "firebase_url": "https://whatsapp-copy.firebaseio.com",
-    "project_id": "whatsapp-copy",
-    "storage_bucket": "whatsapp-copy.appspot.com"
+    "project_number": "157029268392",
+    "firebase_url": "https://urban-crusade-2017.firebaseio.com",
+    "project_id": "urban-crusade-2017",
+    "storage_bucket": "urban-crusade-2017.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:434064450690:android:38b9e942e1951d47",
+        "mobilesdk_app_id": "1:157029268392:android:82a6cfd30aed4569",
         "android_client_info": {
-          "package_name": "com.example.overlord.myapplication"
+          "package_name": "com.thinkternet.urbancrusade2k17"
         }
       },
       "oauth_client": [
         {
-          "client_id": "434064450690-p53qmqomgido6n8cli0k51fu8ja51bi5.apps.googleusercontent.com",
+          "client_id": "157029268392-3oqlc7mppupig5ge5ea106iqc75q32ss.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.overlord.myapplication",
-            "certificate_hash": "007758BDC310EE59BB19536109E34DE73AE7F892"
-          }
-        },
-        {
-          "client_id": "434064450690-op7j34rhpnm1e2uc54l4i28ac3d6jgdk.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.overlord.myapplication",
+            "package_name": "com.thinkternet.urbancrusade2k17",
             "certificate_hash": "86AD28744DFDA13F69A5681FFB1FD32B4E6F6434"
           }
         },
         {
-          "client_id": "434064450690-iier4vqmatu6s5oe26purhn5qsd3o61k.apps.googleusercontent.com",
+          "client_id": "157029268392-uk4s0m71onocr60hpdv0qjfabcg35nb4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBwcdxuRznMOVVEmSPzO2roT3e5RhRlzsY"
+          "current_key": "AIzaSyCx8ZbVMwHaovRRwjGFGUrV8PNdyiZcx08"
         }
       ],
       "services": {
@@ -48,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "434064450690-iier4vqmatu6s5oe26purhn5qsd3o61k.apps.googleusercontent.com",
+              "client_id": "157029268392-uk4s0m71onocr60hpdv0qjfabcg35nb4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -60,28 +52,28 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:434064450690:android:09c8a2739fb4c8a0",
+        "mobilesdk_app_id": "1:157029268392:android:f72a410aca79a64d",
         "android_client_info": {
-          "package_name": "com.example.diksha.admin"
+          "package_name": "com.thinkternet.uc2k17admin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "434064450690-7vjhu5t2ll199c8h740ge6o1ohbvt250.apps.googleusercontent.com",
+          "client_id": "157029268392-0tk7tnv942jqg0e92ifsj27bubj4s7bh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.diksha.admin",
+            "package_name": "com.thinkternet.uc2k17admin",
             "certificate_hash": "007758BDC310EE59BB19536109E34DE73AE7F892"
           }
         },
         {
-          "client_id": "434064450690-iier4vqmatu6s5oe26purhn5qsd3o61k.apps.googleusercontent.com",
+          "client_id": "157029268392-uk4s0m71onocr60hpdv0qjfabcg35nb4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBwcdxuRznMOVVEmSPzO2roT3e5RhRlzsY"
+          "current_key": "AIzaSyCx8ZbVMwHaovRRwjGFGUrV8PNdyiZcx08"
         }
       ],
       "services": {
@@ -92,7 +84,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "434064450690-iier4vqmatu6s5oe26purhn5qsd3o61k.apps.googleusercontent.com",
+              "client_id": "157029268392-uk4s0m71onocr60hpdv0qjfabcg35nb4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

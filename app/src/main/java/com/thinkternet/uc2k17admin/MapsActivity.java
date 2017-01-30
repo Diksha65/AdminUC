@@ -1,6 +1,8 @@
 package com.thinkternet.uc2k17admin;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
@@ -8,8 +10,12 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextClock;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.diksha.admin.R;
+import com.thinkternet.uc2k17admin.R;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -26,6 +32,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String TAG = "MapsActivity";
     private SupportMapFragment mapFragment;
     private View bottomSheet;
+    private Button button;
+    private TextView textView;
 
     private static DataStash dataStash = DataStash.getsDataStash();
 
@@ -95,6 +103,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (dataStash.bottomSheetBehavior .getState() != BottomSheetBehavior.STATE_EXPANDED) {
                     dataStash.googleMap.setPadding(0, 0, 0, bottomSheet.getHeight());
                     dataStash.bottomSheetBehavior .setState(BottomSheetBehavior.STATE_EXPANDED);
+
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(MapsActivity.this, "Button CLicked", Toast.LENGTH_SHORT).show();
+                            countDownStart();
+                        }
+                    });
+
                 }
                 return true;
             }
@@ -132,6 +149,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
+        button = (Button)findViewById(R.id.deleteButton);
+        textView = (TextView)findViewById(R.id.text);
     }
 
     @Override
@@ -142,6 +161,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } else {
             super.onBackPressed();
         }
+
+    }
+
+    private void countDownStart(){
 
     }
 }
