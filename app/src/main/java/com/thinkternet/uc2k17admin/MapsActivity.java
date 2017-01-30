@@ -1,4 +1,4 @@
-package com.example.diksha.admin;
+package com.thinkternet.uc2k17admin;
 
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -8,11 +8,9 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
+import com.example.diksha.admin.R;
 import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,8 +26,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String TAG = "MapsActivity";
     private SupportMapFragment mapFragment;
     private View bottomSheet;
-    private Button deleteButton;
-    private Circle circle;
 
     private static DataStash dataStash = DataStash.getsDataStash();
 
@@ -93,16 +89,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void listeners() {
 
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         dataStash.googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
-            public boolean onMarkerClick(Marker marker) {
+            public boolean onMarkerClick(final Marker marker) {
                 if (dataStash.bottomSheetBehavior .getState() != BottomSheetBehavior.STATE_EXPANDED) {
                     dataStash.googleMap.setPadding(0, 0, 0, bottomSheet.getHeight());
                     dataStash.bottomSheetBehavior .setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -143,7 +132,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
-        deleteButton = (Button)findViewById(R.id.deleteButton);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.diksha.admin;
+package com.thinkternet.uc2k17admin;
 
 import android.location.Location;
 import android.support.design.widget.BottomSheetBehavior;

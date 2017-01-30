@@ -8,7 +8,7 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.diksha.admin.MainActivity">
+    tools:context="com.example.diksha.admin.com.thinkternet.uc2k17admin.MainActivity">
 
 
     <Button
