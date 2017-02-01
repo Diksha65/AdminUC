@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipToPadding="true"
+    android:id="@+id/bottomSheet"
+    app:cardBackgroundColor="#000"
+    app:cardElevation="6dp"
+    app:cardCornerRadius="4dp"
+    app:contentPadding="20dp">
+
+<LinearLayout
+    android:id="@+id/custom_toast_container"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="#DAAA">
+
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="8dp"
+    />
+
+<TextView android:id="@+id/text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    />
+</LinearLayout>
+
+</android.support.v7.widget.CardView>
