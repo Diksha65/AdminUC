@@ -1,11 +1,17 @@
 package com.thinkternet.uc2k17admin;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -54,15 +60,6 @@ public class RandomActivity extends AppCompatActivity {
                 }
             }
         });
-        Blurry.with(RandomActivity.this)
-                .radius(10)
-                .sampling(8)
-                .color(Color.argb(66, 255, 255, 0))
-                .async()
-                .animate(500)
-                .onto(fLayout);
 
     }
-
-
 }
