@@ -1,35 +1,80 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<android.support.v7.widget.CardView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:clipToPadding="true"
-    android:id="@+id/bottomSheet"
-    app:cardBackgroundColor="#000"
-    app:cardElevation="6dp"
-    app:cardCornerRadius="4dp"
-    app:contentPadding="20dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/f_layout">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
 
-<LinearLayout
-    android:id="@+id/custom_toast_container"
-    android:orientation="horizontal"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:background="#DAAA">
+                <EditText
+                    android:id="@+id/usrusr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Username"
+                    android:layout_marginTop="20dp"
+                    android:textSize="16dp"
+                    android:textColorHint="#ADCCE2"
+                    android:textColor="#ADCCE2"
+                    android:layout_marginLeft="22dp"
+                    android:inputType="text"
+                    android:background="#0000"
+                    android:padding="16dp"
+                    android:drawableRight="@drawable/team_name"
+                    android:layout_marginRight="35dp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_height="1dp"
+                    android:background="#ADCCE2" />
 
-<ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginRight="8dp"
-    />
 
-<TextView android:id="@+id/text"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    />
-</LinearLayout>
+            <EditText
+                android:id="@+id/pswrd"
+                android:textSize="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:textColorHint="#ADCCE2"
+                android:layout_marginLeft="22dp"
+                android:inputType="textPassword"
+                android:textColor="#ADCCE2"
+                android:maxLength="10"
+                android:background="#0000"
+                android:padding="16dp"
+                android:drawableRight="@drawable/phone_no"
+                android:layout_marginRight="35dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:background="#ADCCE2"/>
 
-</android.support.v7.widget.CardView>
+            <TextView
+                android:id="@+id/sin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/angle"
+                android:text="Register"
+                android:textSize="16dp"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:padding="16dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="28dp"
+                android:layout_marginTop="32dp"
+                android:elevation="8dp"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

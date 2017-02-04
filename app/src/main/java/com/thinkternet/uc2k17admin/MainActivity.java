@@ -13,17 +13,25 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.maps.model.LatLng;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button SubmitLocations;
     private Button StartRegistration;
+    private Button ViewMap;
     private Button StartGamePlay;
     private Button StopGamePlay;
+    private Button check;
     private TextView textView;
     public CountDownTimer waitTimer;
 
@@ -36,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         createView();
         createListeners();
-
     }
 
     private void createView(){
@@ -44,7 +51,9 @@ public class MainActivity extends AppCompatActivity {
         StartGamePlay = (Button)findViewById(R.id.startGamePlay);
         textView = (TextView)findViewById(R.id.textView);
         StopGamePlay = (Button)findViewById(R.id.stopGamePlay);
+        check = (Button)findViewById(R.id.check);
         StartRegistration = (Button)findViewById(R.id.startRegistration);
+        ViewMap = (Button)findViewById(R.id.viewMap);
     }
 
     private void createListeners(){
@@ -53,11 +62,31 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 addLocationstoFirebase();
                 //transaction();
+                SubmitLocations.setText("Do not press again");
+                SubmitLocations.setEnabled(false);
+            }
+        });
+
+
+        ViewMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dataStash.firebase.child(CONSTANTS.FIREBASE.AVAILABLE_LOCATIONS)
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                Toast.makeText(getApplicationContext(), dataSnapshot.toString(), Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                 Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
             }
         });
-
 
         StartGamePlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,36 +131,23 @@ public class MainActivity extends AppCompatActivity {
                 toast.show();
             }
         });
-    }
 
+        check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CheckActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
     private void addLocationstoFirebase(){
-        LatLng latLngs[] = dataStash.getLatLngs();
-        int i=0;
-        String key;
-        for(LatLng latLng : latLngs){
-            i += 1;
-            Log.d("Adding geolocations ", dataStash.getString(latLng));
-            key = dataStash.firebase.child(CONSTANTS.FIREBASE.AVAILABLE_LOCATIONS).push().getKey();
-            dataStash.firebase.child(CONSTANTS.FIREBASE.AVAILABLE_LOCATIONS).child(key).setValue(dataStash.getString(latLng));
-        }
-        Log.d("ADDED", "added all the locations to firebase");
+        Map<String, Object> teamBaseData = new HashMap<>();
+
+        for(LatLng latLng : dataStash.LatLngs)
+            teamBaseData.put(UUID.randomUUID().toString(), latLng);
+
+        dataStash.firebase
+                .child(CONSTANTS.FIREBASE.AVAILABLE_LOCATIONS)
+                .updateChildren(teamBaseData);
     }
-
-    private void transaction(){
-        dataStash.firebase.child(CONSTANTS.FIREBASE.AVAILABLE_LOCATIONS)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        String latlng = dataSnapshot.getValue().toString();
-                        Toast.makeText(MainActivity.this, latlng, Toast.LENGTH_LONG).show();
-                        Log.d("FETCHED", latlng);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-    }
-
 }
